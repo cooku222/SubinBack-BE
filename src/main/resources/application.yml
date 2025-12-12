@@ -17,7 +17,7 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
 
-  # H2 콘솔은 이제 안 쓸 거면 꺼두기
+  # H2 안 쓸 거라 꺼두기
   h2:
     console:
       enabled: false
