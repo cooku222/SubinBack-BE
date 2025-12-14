@@ -37,7 +37,7 @@ public class AccountController {
 
         boolean isAdmin = authentication.getAuthorities()
                 .contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        // 3. IDOR 패치
+
         if (!isAdmin && !account.getOwner().getEmail().equals(user.getEmail())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
