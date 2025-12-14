@@ -42,8 +42,16 @@ public class FintechAuthApplication {
                         Role.USER
                 );
 
+                User admin = new User(
+                        "Admin",
+                        "admin@test.com",
+                        passwordEncoder.encode("admin1234!"),
+                        Role.ADMIN
+                )
+
                 userRepository.save(alice);
                 userRepository.save(bob);
+                userRepository.save(admin);
 
                 // 각자 계좌 생성
                 Account a1 = new Account(
