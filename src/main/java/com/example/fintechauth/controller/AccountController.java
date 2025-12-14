@@ -6,6 +6,8 @@ import com.example.fintechauth.repository.AccountRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,6 +25,7 @@ public class AccountController {
     @GetMapping("/{id}")
     public ResponseEntity<AccountResponse> getAccountById(
             @PathVariable Long id,
+            @AuthenticationPrincipal User user,
             Authentication authentication   // 현재 로그인한 사용자 정보
     ) {
         // 1. 현재 로그인한 사용자 이메일 가져오기
@@ -32,8 +35,10 @@ public class AccountController {
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
 
+        boolean isAdmin = authentication.getAuthorities()
+                .contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
         // 3. IDOR 패치
-        if (!account.getOwner().getEmail().equals(currentEmail)) {
+        if (!isAdmin && !account.getOwner().getEmail().equals(user.getEmail())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
