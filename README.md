@@ -24,9 +24,6 @@
 
 ### 2) Run (Local)
 ```bash
-# Gradle
-./gradlew bootRun
-
-# or build & run
-./gradlew build
-java -jar build/libs/*.jar
+# Maven
+& "./mvn.cmd" spring-boot:run
+```
