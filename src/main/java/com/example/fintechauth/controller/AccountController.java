@@ -2,6 +2,7 @@ package com.example.fintechauth.controller;
 
 import com.example.fintechauth.dto.AccountResponse;
 import com.example.fintechauth.entity.Account;
+import com.example.fintechauth.entity.User;
 import com.example.fintechauth.repository.AccountRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
