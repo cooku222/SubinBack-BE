@@ -11,7 +11,7 @@ import com.example.fintechauth.entity.User;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-    @GetMapping("/me")
+    @GetMapping("/{id}")
     public ResponseEntity<?> me(@AuthenticationPrincipal User user) {
         if (user == null) {
             return ResponseEntity.status(401).build();
